@@ -1,0 +1,26 @@
+{
+  "name": "watchstore-rest-api",
+  "version": "1.0.0",
+  "description": "This is a REST API for the watchstore poject.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinyovkov/Watchstore-REST-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinyovkov/Watchstore-REST-API/issues"
+  },
+  "homepage": "https://github.com/martinyovkov/Watchstore-REST-API#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.2"
+  }
+}
