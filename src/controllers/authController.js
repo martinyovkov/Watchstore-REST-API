@@ -72,8 +72,7 @@ router.post('/register', async (req, res) => {
         }
 
         res.cookie(COOKIE_SESSION_NAME, token, cookieSettings);
-        res.json({ status: 200, user });
-        res.end();
+        res.json({ status: 200, user});
 
     } catch (error) {
         console.log(error);
