@@ -1,11 +1,14 @@
 const express = require('express');
-const {connectDatabase} = require('./src/config/initDatabase');
 const dotenv = require('dotenv');
+const {connectDatabase} = require('./src/config/initDatabase');
+
+
+dotenv.config();
 const router = require('./src/router');
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-dotenv.config();
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
