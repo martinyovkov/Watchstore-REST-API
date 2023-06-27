@@ -16,11 +16,25 @@ app.use(require('cors')({
 app.use(require('cookie-parser'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(router)
+app.use(router);
+
+const sessionSettings = {
+    secret: process.env.SECRET,
+    resave: false,
+    cookie: {
+        httpOnly: true
+    },
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_QUERYSTRING, dbName: 'WatchStore' })
+}
 
 if (process.env.ENVIRONMENT !== 'development') {
-    app.set('trust proxy', 1);
+    app.set('trust proxy', 1)
+    sessionSettings.cookie.secure = true
+    sessionSettings.cookie.sameSite = 'none'
 }
+
+app.use(session(sessionSettings))
 
 connectDatabase()
     .then(()=>{
