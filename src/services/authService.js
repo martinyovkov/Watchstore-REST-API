@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { SECRET } = process.env;
-const { COOKIE_SESSION_NAME } = process.env;
 
 exports.create = async (userData) => (
      User.create(userData))

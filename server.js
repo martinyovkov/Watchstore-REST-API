@@ -3,6 +3,8 @@ const {connectDatabase} = require('./src/config/initDatabase');
 const dotenv = require('dotenv');
 const router = require('./src/router');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 dotenv.config();
 const PORT = process.env.PORT || 3001;
 
@@ -25,7 +27,7 @@ const sessionSettings = {
         httpOnly: true
     },
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_QUERYSTRING, dbName: 'WatchStore' })
+    store: MongoStore.create({ mongoUrl: process.env.DB_QUERYSTRING })
 }
 
 if (process.env.ENVIRONMENT !== 'development') {
@@ -43,10 +45,3 @@ connectDatabase()
     .catch(err=>{
         console.log(('Application failed:', err));
     });
-
-    
-
-
-
-
-
