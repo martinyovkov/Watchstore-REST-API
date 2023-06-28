@@ -1,9 +1,12 @@
 const express = require('express');
+
 const dotenv = require('dotenv');
+dotenv.config();
+
+const app = express();
+
 const {connectDatabase} = require('./src/config/initDatabase');
 
-
-dotenv.config();
 const router = require('./src/router');
 
 const session = require('express-session');
@@ -11,16 +14,15 @@ const MongoStore = require('connect-mongo');
 
 const PORT = process.env.PORT || 3001;
 
-const app = express();
-
 app.use(require('cors')({
     origin: process.env.ORIGIN,
     credentials: true
 }));
 
-app.use(require('cookie-parser'));
+//app.use(require('cookie-parser'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
 app.use(router);
 
 const sessionSettings = {
@@ -43,7 +45,7 @@ app.use(session(sessionSettings))
 
 connectDatabase()
     .then(()=>{
-        app.listen(PORT,()=> console.log(`Server is listening on port: ${PORT}`));
+        app.listen(PORT, ()=> console.log(`Server is listening on port: ${PORT}`));
     })
     .catch(err=>{
         console.log(('Application failed:', err));
