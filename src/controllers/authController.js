@@ -32,13 +32,11 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
     const { email, username, password, rePassword } = req.body;
 
-    console.log('s');
     if (password !== rePassword) {
         return res.status(400).json({ status: 400, message: 'Password mismatch!' })
     }
 
     try {
-        console.log('s');
         const existing = await authService.getUserByEmail(email);
 
         if (existing) { throw { message: 'This email already exists!' } }
@@ -48,7 +46,7 @@ router.post('/register', async (req, res) => {
         req.session.regenerate(function (err) {
             if (err) return res.json(err)
 
-            req.session.user = user
+            req.session.user = user;
 
             res.status(200).json(user);
         });
@@ -69,7 +67,7 @@ router.get('/logout', isAuthenticated, (req, res) => {
 });
 
 router.get('/me', async (req, res) => {
-    res.json(req.session.user, { _id: null }) 
+    res.json(req.session.user) 
 });
 
 module.exports = router;

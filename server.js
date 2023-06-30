@@ -23,7 +23,7 @@ app.use(require('cors')({
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(router);
+
 
 const sessionSettings = {
     secret: process.env.SECRET,
@@ -41,8 +41,9 @@ if (process.env.ENVIRONMENT !== 'development') {
     sessionSettings.cookie.sameSite = 'none'
 }
 
-app.use(session(sessionSettings))
+app.use(session(sessionSettings));
 
+app.use(router);
 connectDatabase()
     .then(()=>{
         app.listen(PORT, ()=> console.log(`Server is listening on port: ${PORT}`));

@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const { SECRET } = process.env;
 
-exports.create = async (userData) => (
+const create = async (userData) => (
      User.create(userData))
     .then(user => { return user; })
     .catch(err => {
@@ -47,8 +47,8 @@ exports.create = async (userData) => (
         throw error;
     });
 
-exports.login = async (email, password) => {
-    let user = await getUserByEmail(email)
+const login = async (email, password) => {
+    let user = await getUserByEmail(email);
 
     if (!user) {
         throw { message: 'Invalid email or password!' };
@@ -86,7 +86,9 @@ exports.createToken = (user) => {
 const verifyJWTPromisified = util.promisify(jwt.verify);
 exports.verifyAccessToken = (token) => verifyJWTPromisified(token, process.env.SECRET)
 
-exports.getUserByEmail = (email) => User.findOne({ email })
+const getUserByEmail = (email) => User.findOne({ email })
     .lean()
     .then(user => user)
     .catch(err => null)
+
+module.exports = {create, login, getUserByEmail};
