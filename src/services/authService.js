@@ -63,7 +63,7 @@ const login = async (email, password) => {
     return { ...user};
 };
 
-exports.createToken = (user) => {
+/* exports.createToken = (user) => {
 
     const payload = {
         ...user
@@ -81,10 +81,10 @@ exports.createToken = (user) => {
     });
 
     return tokenPromise;
-}
+} */
 
-const verifyJWTPromisified = util.promisify(jwt.verify);
-exports.verifyAccessToken = (token) => verifyJWTPromisified(token, process.env.SECRET)
+/* const verifyJWTPromisified = util.promisify(jwt.verify);
+exports.verifyAccessToken = (token) => verifyJWTPromisified(token, process.env.SECRET) */
 
 const getUserByEmail = (email) => User.findOne({ email })
     .lean()

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const watchService = require('../services/watchService');
-const isAuthenticated = require('../middlewares/isAuthenticated');
+const {isAuthenticated, isAdmin} = require('../middlewares/authMiddlewares');
 
 
-router.post('/create', isAuthenticated, ((req, res) => {
+router.post('/create', isAuthenticated, isAdmin, ((req, res) => {
    watchService.create({...req.body, publisherId: req.session.user._id})
     .then(watch => res.json(watch))
     .catch(error => res.status(400).json({...error}));
@@ -24,7 +24,7 @@ router.get('/:_id', (req, res) => {
 
 });
 
-router.put('/:_id', isAuthenticated, (req, res) => {
+router.put('/:_id', isAuthenticated, isAdmin, (req, res) => {
 
     watchService.edit({ _id: req.params._id, ...req.body })
         .then(watch => res.json(watch))
@@ -32,7 +32,7 @@ router.put('/:_id', isAuthenticated, (req, res) => {
 
 });
 
-router.delete('/:_id', isAuthenticated, async (req, res) => {
+router.delete('/:_id', isAuthenticated, isAdmin, async (req, res) => {
 
     try {
         const wacth = await watchService.getById(req.params._id);

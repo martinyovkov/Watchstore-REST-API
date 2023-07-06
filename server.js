@@ -6,6 +6,7 @@ dotenv.config();
 const app = express();
 
 const {connectDatabase} = require('./src/config/initDatabase');
+const {assureAdminIsCreated} = require('./src/config/adminCreate');
 
 const router = require('./src/router');
 
@@ -51,3 +52,5 @@ connectDatabase()
     .catch(err=>{
         console.log(('Application failed:', err));
     });
+
+assureAdminIsCreated();

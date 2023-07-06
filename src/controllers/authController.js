@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const isAuthenticated = require('../middlewares/isAuthenticated');
+const {isAuthenticated} = require('../middlewares/authMiddlewares');
 const authService = require('../services/authService');
 
 router.post('/login', async (req, res) => {
