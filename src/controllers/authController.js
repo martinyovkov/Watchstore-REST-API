@@ -8,7 +8,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        return res.status(400).json({ status: 400, message: 'Email and pasword are required!' });
+        return res.status(400).json({ status: 400, message: 'Email and password are required!' });
     }
 
     try {
