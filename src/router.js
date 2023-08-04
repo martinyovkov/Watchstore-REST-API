@@ -5,7 +5,7 @@ const watchController = require('./controllers/watchController');
 
 
 router.use(authController);
-router.use('/wacthes', watchController);
+router.use('/watches', watchController);
 
 
 module.exports = router;
