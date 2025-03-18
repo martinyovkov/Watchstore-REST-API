@@ -1,4 +1,5 @@
 const Watch = require('../models/Watch');
+const WishList = require('../models/WishList');
 
 const normalize = require('../utils/MongoErrorNormalizer');
 
@@ -42,4 +43,22 @@ const getById = async (_id) => {
     } catch (error) { return null }
 }
 
-module.exports = {getAll, create, edit, remove, getById };
+const addToWishList = async(watch_id, user_id) => {
+    try{
+        const owner_id = user_id;
+        const wishlist = await WishList.findOne(owner_id).lean();
+
+        if (!wishlist) {
+            wishlist = await WishList.create(owner_id).lean();
+        }
+
+        if (!wishlist.items.includes(watch_id)) {
+            wishlist.items.push(watch_id);
+        }else {
+            const index = wishlist.items.indexOf(watch_id);
+            wishlist.items.slice(index, i); 
+        }
+    } catch (err) {throw normalize('Wish list error!', err)}
+}
+
+module.exports = {getAll, create, edit, remove, getById, addToWishList };

@@ -20,7 +20,6 @@ app.use(require('cors')({
     credentials: true
 }));
 
-//app.use(require('cookie-parser'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 

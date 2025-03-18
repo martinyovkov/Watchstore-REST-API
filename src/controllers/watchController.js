@@ -36,10 +36,7 @@ router.delete('/:_id', isAuthenticated, isAdmin, async (req, res) => {
 
     try {
         const wacth = await watchService.getById(req.params._id);
-        await watchService.remove(req.params._id);    
-
-        //await clearVehicleFromCarts(req.params._id);
-        //await clearVehicleFromWishLists(req.params._id);
+        await watchService.remove(req.params._id);  
 
     } catch (error) {
         res.status(400).json({ status: 400, ...error })
@@ -47,6 +44,20 @@ router.delete('/:_id', isAuthenticated, isAdmin, async (req, res) => {
 
     res.json({ status: 200, message: 'Watch has been deleted!' });
 
+});
+
+router.post('/addtowishlist/:_id', isAuthenticated, async(req, res)=>{
+    try {
+          await watchService.addToWishList(req.params._id, req.session.user._id);
+    } catch (error) {
+        res.status(400).json({ status: 400, ...error })
+    }
+    
+    res.json({ status: 200, message: 'Watch has been added to Wish list!' });
+});
+
+router.post('/addtocart/:_id', isAuthenticated, async(req, res) =>{
+    
 });
 
 module.exports = router;

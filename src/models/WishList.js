@@ -7,8 +7,7 @@ const wishListSchema = new mongoose.Schema({
         required: [true, 'Owner _id is required']
     },
     items: {
-        type: [String],
-        required: [true, 'Items are required'],
+        type: [mongoose.Types.ObjectId]
     },
 });
 
